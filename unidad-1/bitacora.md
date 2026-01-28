@@ -3,9 +3,14 @@
 ## Bitácora de proceso de aprendizaje
 
 ### Actividad 1
--¿Qué es un sistema físico interactivo?
 
--¿Cómo podrías aplicar lo que has visto en tu perfil profesional?
+#### -¿Qué es un sistema físico interactivo?
+
+R= Es un sistema que responde a estimulos humanos o del entorno y los traduce en experiencias interactivas unicas
+
+#### -¿Cómo podrías aplicar lo que has visto en tu perfil profesional?
+
+R= Podria crearse un sistema en el que al detectarse ciertos movimentos se ejecuten ciertas animaciones para que interactuen las persones con el sistema
 
 ### Atividad 2
 
@@ -20,3 +25,4 @@
 
 
 ## Bitácora de reflexión
+
