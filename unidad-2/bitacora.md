@@ -167,6 +167,55 @@ while True:
     utime.sleep_ms(20)
 
 ```
+codigo PlantML
+
+```
+
+@startuml
+
+<style>
+root {
+  BackgroundColor #4a556822
+  FontColor #718096
+  LineColor #718096
+  Margin 30
+  Padding 10
+}
+
+stateDiagram {
+  state {
+    BackgroundColor #edf2f7
+    LineColor #4a5568
+    FontColor #2d3748
+    RoundCorner 10
+  }
+  arrow {
+    LineColor #718096
+    FontColor #718096
+  }
+}
+</style>
+
+title Micro:bit Countdown - UML State Machine
+
+[*] --> Config : Task() (constructor)
+
+Config : entry /\n  count = 20\n  display.show(FILL[count]) \n A / if count>15 then count-=1; display.show(FILL[count]) \n B / if count<25 then count+=1; display.show(FILL[count])
+Config --> Armado : S /
+
+Armado : entry /\n  myTimer.start(1000) \nTimeout / \n if count>0 then count-=1; display.show(FILL[count]); myTimer.start(1000) \nexit / \n self.myTimer.stop()
+
+
+Armado --> Explosion : Timeout [count==0] /
+
+Explosion : entry /\n  display.show(Image.SKULL)\n  music.play(music.DADADADUM)
+Explosion --> Config : A /
+
+@enduml
+
+```
+
+<img width="515" height="569" alt="image" src="https://github.com/user-attachments/assets/8989371f-8f1c-420c-81b7-6c3606796e42" />
 
 
 ## Bitácora de aplicación 
@@ -382,4 +431,5 @@ function keyPressed() {
   if (key === 'S') writeSerial("S\n");
 }
 ```
+
 
