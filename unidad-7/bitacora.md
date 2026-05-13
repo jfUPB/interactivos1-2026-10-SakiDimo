@@ -57,6 +57,15 @@
 
 - Compara en una tabla las fuentes de datos que has trabajado en las unidades 4, 5, 6 y 7. Compara al menos:
 
+| Aspecto | Unidad 4 | Unidad 5 | Unidad 6 | Unidad 7 |
+|---|---|---|---|---|
+| **Fuente de datos** | micro:bit físico | micro:bit físico | Strudel (app web) | Open Stage Control (app web) |
+| **Formato del mensaje** | CSV: `$T\|X\|Y\|A\|B\|CHK\n` | Binario: 8 bytes con `0xAA` y checksum | JSON por WebSocket con args OSC | Paquete OSC por UDP |
+| **Tipo de dato** | Estado del sensor en tiempo real | Estado del sensor en tiempo real | Evento musical temporizado | Parámetro de control persistente |
+| **Problema técnico principal** | Parsear CSV y validar checksum | Framing binario y sincronización de bytes | Sincronización temporal con timestamp | Parseo manual de OSC binario sin librerías |
+| **Lugar de traducción** | `MicrobitV2Adapter._onChunk()` | `MicrobitBinaryAdapter._onChunk()` | `StrudelAdapter._normalize()` | `OpenStageControlAdapter._parseOSC()` |
+| **Papel del tiempo** | Sin rol — datos se usan inmediatamente | Sin rol — paquetes se procesan al llegar | Central — cola temporal por timestamp | Sin rol — el valor reemplaza al anterior |
+| **Relación con el estado** | Reemplaza el estado actual en cada frame | Reemplaza el estado actual en cada frame | Dispara animaciones efímeras en su timestamp | Actualiza variables persistentes que el render lee siempre |
 
 - Explica por qué Open Stage Control no debe tratarse igual que Strudel dentro de la arquitectura.
   - R= Strudel produce eventos que ocurren en un instante y se consumen. Open Stage Control produce parámetros que describen cómo debe comportarse el sistema a partir de ahora. Si un mensaje OSC entrara a la cola temporal, se dispararía una sola vez en su momento de llegada y luego el sistema perdería el valor. El color volvería al default en el siguiente frame. La diferencia no es de protocolo sino de semántica: uno produce eventos, el otro produce estado.
